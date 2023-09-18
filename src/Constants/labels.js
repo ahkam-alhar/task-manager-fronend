@@ -36,8 +36,13 @@ export const STATUS = 'Status';
 export const CREATED_DATE = 'Created Date';
 export const ENTER_TASK_NAME = 'Enter Task Name';
 export const THIS_IS_REQUIRED_FIELD = 'This is required field';
+export const NO_DATA_FOUND = 'No data found!';
 
 // Modal Labels
 export const ARE_YOU_SURE = 'Are you sure?';
 export const DO_YOU_WANT_TO_DELETE_THIS_RECORD =
   'Do you want to delete this record?';
+
+export const CURRENT_PENDING_TASKS_SUMMARY = 'Current Pending Tasks Summary';
+export const CHART_NOT_AVAILABLE_DUE_TO_NO_DATA =
+  'Chart not available due to no data!!!';

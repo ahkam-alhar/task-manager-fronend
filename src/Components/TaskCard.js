@@ -5,13 +5,7 @@ import * as Label from '../Constants/labels';
 const TaskCard = (props) => {
   const [dataSet, setDataSet] = useState();
 
-  const {
-    classOverride,
-    cardHeading,
-    textClassOverride,
-    cardData,
-    additionalTag,
-  } = props;
+  const { classOverride, cardHeading, textClassOverride, cardData } = props;
 
   useEffect(() => {
     if (cardData) {
@@ -52,11 +46,17 @@ const TaskCard = (props) => {
                       <div className={`${value.cssText} px-2`}>
                         {value.priorityValue}
                       </div>
-                      {additionalTag}
                     </div>
                   </li>
                 );
               })}
+            {dataSet && dataSet.length === 0 && (
+              <>
+                <h3 className="text-secondary text-center">
+                  {Label.NO_DATA_FOUND}
+                </h3>
+              </>
+            )}
           </ul>
         </div>
       </div>
@@ -69,13 +69,11 @@ TaskCard.propTypes = {
   cardHeading: PropTypes.string.isRequired,
   textClassOverride: PropTypes.string,
   cardData: PropTypes.array.isRequired,
-  additionalTag: PropTypes.element,
 };
 
 TaskCard.defaultProps = {
   classOverride: '',
   textClassOverride: '',
-  additionalTag: <></>,
 };
 
 export default TaskCard;

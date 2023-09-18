@@ -4,7 +4,7 @@ import Loader from '../../Components/Loader';
 import { useEffect, useState } from 'react';
 import * as Label from '../../Constants/labels';
 import { deleteTask, getAllTask, updateTask } from '../../actions/task-actions';
-import ReactModal from 'react-modal';
+import Modal from '../../Components/Modal';
 
 const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
   const [taskList, setTaskList] = useState([]);
@@ -110,17 +110,6 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     if (updateValue.task.length !== 0) updateTaskFn(value.id, updateValue);
   };
 
-  const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
   return (
     <>
       {loading && <Loader />}
@@ -128,7 +117,7 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
         <h2>{Label.MANAGE_TASKS}</h2>
         <div className={`card custom-height`}>
           <div className="card-body overflow-auto">
-            <table class="table table-hover">
+            <table className="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -252,26 +241,31 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
                     </tr>
                   );
                 })}
+                {taskList && taskList.length === 0 && (
+                  <tr>
+                    <td colSpan={7}>
+                      <h2 className="text-secondary text-center">
+                        {Label.NO_DATA_FOUND}
+                      </h2>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <ReactModal
-        isOpen={viewModal}
-        contentLabel="example modal"
-        style={customStyles}
-        onRequestClose={closeModal}
-      >
-        <h3 className="text-danger">{Label.ARE_YOU_SURE}</h3>
-        <p>{Label.DO_YOU_WANT_TO_DELETE_THIS_RECORD}</p>
-        <button className="btn btn-outline-secondary" onClick={closeModal}>
-          {Label.BUTTON_CANCEL}
-        </button>
-        <button className="btn btn-danger mx-2" onClick={onDelete}>
-          {Label.BUTTON_DELETE}
-        </button>
-      </ReactModal>
+      <Modal
+        showModal={viewModal}
+        heading={Label.ARE_YOU_SURE}
+        headingClassOverride={'text-danger'}
+        content={Label.DO_YOU_WANT_TO_DELETE_THIS_RECORD}
+        buttonFunc={onDelete}
+        buttonText={Label.BUTTON_DELETE}
+        buttonClassOverride={'btn-danger'}
+        button2Text={Label.BUTTON_CANCEL}
+        button2Func={closeModal}
+      />
     </>
   );
 };

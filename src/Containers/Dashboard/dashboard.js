@@ -74,7 +74,9 @@ const Dashboard = ({ loading, allTasks }) => {
         color: '#adb5bd',
       });
 
-      setPieChartData(pieData);
+      const filteredPieData = pieData.filter((task) => task.value !== 0);
+
+      setPieChartData(filteredPieData);
     }
   }, [allTasks]);
 
@@ -94,7 +96,29 @@ const Dashboard = ({ loading, allTasks }) => {
               />
             </div>
             <div className="right-sub-container">
-              <PieChart data={pieChartData} />
+              <h6 className="text-dark">
+                {Label.CURRENT_PENDING_TASKS_SUMMARY}
+              </h6>
+              {console.log('pieedata', pieChartData)}
+              {pieChartData && pieChartData.length !== 0 && (
+                <PieChart
+                  data={pieChartData}
+                  lineWidth={60}
+                  label={(props) => {
+                    const { percentage, title, value } = props.dataEntry;
+                    return `${title} - ${value}(${percentage.toFixed(0)}%)`;
+                  }}
+                  labelStyle={{
+                    fontSize: '7px',
+                    fill: '#121212',
+                  }}
+                />
+              )}
+              {pieChartData && pieChartData.length === 0 && (
+                <h3 className="text-secondary text-center my-5">
+                  {Label.CHART_NOT_AVAILABLE_DUE_TO_NO_DATA}
+                </h3>
+              )}
             </div>
           </div>
           <hr />
@@ -113,7 +137,6 @@ const Dashboard = ({ loading, allTasks }) => {
                 textClassOverride={'text-secondary'}
                 cardHeading={'Open Tasks'}
                 cardData={openTasks}
-                // additionalTag={<button className='btn btn-outline-primary btn-sm'>Start</button>}
               />
             </div>
           </div>

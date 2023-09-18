@@ -28,7 +28,7 @@ const taskReducer = (state = initialState, action) => {
     case SAVE_TASK:
       return {
         ...state,
-        saveCount: state.saveCount + 1,
+        allTasks: null,
         loading: false,
       };
     case DELETE_TASK:

@@ -77,7 +77,7 @@ const CreateTask = ({ loading, saveTaskFn }) => {
               )}
             </div>
             <div className="form-group my-3">
-              <label for="inputState">{Label.PRIORITY}</label>
+              <label>{Label.PRIORITY}</label>
               <select
                 className="form-control"
                 name="priority"
