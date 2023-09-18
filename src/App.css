@@ -1,0 +1,20 @@
+.App {
+  padding: 10px 20px;
+  background-color: gainsboro;
+}
+
+.main-container {
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 10px 15px;
+  height: auto;
+}
+
+.viewpoint-height {
+  height: 84.5vh !important;
+}
+
+.custom-height {
+  height: 90% !important;
+}
