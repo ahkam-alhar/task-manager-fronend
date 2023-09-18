@@ -3,3 +3,5 @@ export const SET_LOADING = 'SET_LOADING';
 export const SAVE_TASK = 'SAVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';
+export const API_FAILURE = 'API_FAILURE';
+export const HANDLE_API_FAILURE_MODAL = 'HANDLE_API_FAILURE_MODAL';

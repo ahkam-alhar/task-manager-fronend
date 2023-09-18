@@ -1,6 +1,8 @@
 import {
+  API_FAILURE,
   DELETE_TASK,
   GET_DASHBOARD_TASKS,
+  HANDLE_API_FAILURE_MODAL,
   SAVE_TASK,
   SET_LOADING,
   UPDATE_TASK,
@@ -9,7 +11,8 @@ import {
 const initialState = {
   loading: true,
   allTasks: null,
-  saveCount: 0,
+  apiFailure: null,
+  showApiFailureModal: false,
 };
 
 /**
@@ -26,6 +29,7 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         allTasks: action.payload,
         loading: false,
+        showApiFailureModal: false,
       };
     case SET_LOADING:
       return {
@@ -37,17 +41,34 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         allTasks: null,
         loading: false,
+        showApiFailureModal: false,
       };
     case DELETE_TASK:
       return {
         ...state,
         allTasks: null,
         loading: false,
+        showApiFailureModal: false,
       };
     case UPDATE_TASK:
       return {
         ...state,
         allTasks: null,
+        loading: false,
+        showApiFailureModal: false,
+      };
+    case API_FAILURE:
+      return {
+        ...state,
+        apiFailure: action.payload,
+        showApiFailureModal: true,
+        loading: false,
+      };
+    case HANDLE_API_FAILURE_MODAL:
+      return {
+        ...state,
+        apiFailure: null,
+        showApiFailureModal: action.payload,
         loading: false,
       };
     default:

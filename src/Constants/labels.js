@@ -12,6 +12,7 @@ export const BUTTON_DELETE = 'Delete';
 export const BUTTON_CANCEL = 'Cancel';
 export const BUTTON_SUBMIT = 'Submit';
 export const BUTTON_RESET = 'Reset';
+export const BUTTON_OK = 'Ok';
 
 // Priority
 export const LOW = 'Low';
@@ -46,3 +47,8 @@ export const DO_YOU_WANT_TO_DELETE_THIS_RECORD =
 export const CURRENT_PENDING_TASKS_SUMMARY = 'Current Pending Tasks Summary';
 export const CHART_NOT_AVAILABLE_DUE_TO_NO_DATA =
   'Chart not available due to no data!!!';
+export const SOMETHING_WENT_WRONG = 'Something went wrong!!!';
+export const TRY_AGAIN_LATER_OR_CONTACT_ADMIN =
+  'Try again later or contact admin';
+
+export const ERROR_404 = 404;

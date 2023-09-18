@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
+  API_FAILURE,
   DELETE_TASK,
   GET_DASHBOARD_TASKS,
+  HANDLE_API_FAILURE_MODAL,
   SAVE_TASK,
   SET_LOADING,
   UPDATE_TASK,
@@ -12,7 +14,7 @@ import { config } from '../config/config';
  * Action Type: ActionTypes.GET_DASHBOARD_TASKS
  * Description: Dispatched when get all tasks from task table.
  */
-export const getDashboardTasks = (data) => {
+export const successGetDashboardTasks = (data) => {
   return {
     type: GET_DASHBOARD_TASKS,
     payload: data,
@@ -34,7 +36,7 @@ export const setLoadingStatus = (loading) => {
  * Action Type: ActionTypes.SAVE_TASK
  * Description: Dispatched when a new task is added to the task table.
  */
-export const changeSaveTaskCount = (data) => {
+export const successSaveTask = (data) => {
   return {
     type: SAVE_TASK,
     payload: data,
@@ -63,15 +65,41 @@ export const successUpdateTask = (data) => {
   };
 };
 
+/**
+ * Action Type: ActionTypes.API_FAILURE
+ * Description: Dispatched when API response getting failed.
+ */
+export const apiFailure = (data) => {
+  return {
+    type: API_FAILURE,
+    payload: data,
+  };
+};
+
+/**
+ * Action Type: ActionTypes.HANDLE_API_FAILURE_MODAL
+ */
+export const handleApiFailureModal = (data) => {
+  return {
+    type: HANDLE_API_FAILURE_MODAL,
+    payload: data,
+  };
+};
+
 export const getAllTask = () => (dispatch) => {
   const { url, method } = config.getAllTasks;
 
   return axios({
     url,
     method,
-  }).then((response) => {
-    dispatch(getDashboardTasks(response.data));
-  });
+  })
+    .then((response) => {
+      dispatch(successGetDashboardTasks(response.data));
+    })
+    .catch((e) => {
+      const error = e && e.response && e.response.data;
+      dispatch(apiFailure(error));
+    });
 };
 
 export const saveTask = (data) => (dispatch) => {
@@ -81,9 +109,14 @@ export const saveTask = (data) => (dispatch) => {
     url,
     method,
     data,
-  }).then((response) => {
-    dispatch(changeSaveTaskCount(response));
-  });
+  })
+    .then((response) => {
+      dispatch(successSaveTask(response));
+    })
+    .catch((e) => {
+      const error = e && e.response && e.response.data;
+      dispatch(apiFailure(error));
+    });
 };
 
 export const deleteTask = (id) => (dispatch) => {
@@ -92,10 +125,15 @@ export const deleteTask = (id) => (dispatch) => {
   return axios({
     url: url.replace(':id', id),
     method,
-  }).then((response) => {
-    dispatch(successDeleteTask(response));
-    dispatch(getAllTask());
-  });
+  })
+    .then((response) => {
+      dispatch(successDeleteTask(response));
+      dispatch(getAllTask());
+    })
+    .catch((e) => {
+      const error = e && e.response && e.response.data;
+      dispatch(apiFailure(error));
+    });
 };
 
 export const updateTask = (id, data) => (dispatch) => {
@@ -105,8 +143,13 @@ export const updateTask = (id, data) => (dispatch) => {
     url: url.replace(':id', id),
     method,
     data,
-  }).then((response) => {
-    dispatch(successUpdateTask(response));
-    dispatch(getAllTask());
-  });
+  })
+    .then((response) => {
+      dispatch(successUpdateTask(response));
+      dispatch(getAllTask());
+    })
+    .catch((e) => {
+      const error = e && e.response && e.response.data;
+      dispatch(apiFailure(error));
+    });
 };
