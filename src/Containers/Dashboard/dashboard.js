@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import { getAllTask } from '../../actions/task-actions';
 import Loader from '../../Components/Loader';
 import TaskCard from '../../Components/TaskCard';
+import { PieChart } from 'react-minimal-pie-chart';
+import * as Label from '../../Constants/labels';
 
 const Dashboard = ({ loading, allTasks }) => {
   const [highPrioPendingTasks, setHighPrioPendingTasks] = useState([]);
   const [lowMedPrioPendingTasks, setLowMedPrioPendingTasks] = useState([]);
   const [openTasks, setOpenTasks] = useState([]);
-  // const [data, setData] = useState([{ x: 'Cats', y: 35 }, { x: 'Dogs', y: 55 }, { x: 'Birds', y: 10 }]);
+  const [pieChartData, setPieChartData] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,6 +56,25 @@ const Dashboard = ({ loading, allTasks }) => {
         ...mediumPrioOpenTaskList,
         ...lowPrioOpenTaskList,
       ]);
+
+      const pieData = [];
+      pieData.push({
+        title: Label.HIGH,
+        value: highPrioPendingTaskList.length,
+        color: '#dc3545',
+      });
+      pieData.push({
+        title: Label.MEDIUM,
+        value: mediumPrioPendingTaskList.length,
+        color: '#ffc107',
+      });
+      pieData.push({
+        title: Label.LOW,
+        value: lowPrioPendingTaskList.length,
+        color: '#adb5bd',
+      });
+
+      setPieChartData(pieData);
     }
   }, [allTasks]);
 
@@ -73,13 +94,7 @@ const Dashboard = ({ loading, allTasks }) => {
               />
             </div>
             <div className="right-sub-container">
-              {/* <Doughnut 
-                            data={data}
-                            width='500'
-                            height='500'
-                            legendPosition='left'
-                            constrainToVisibleArea='true'
-                        /> */}
+              <PieChart data={pieChartData} />
             </div>
           </div>
           <hr />
