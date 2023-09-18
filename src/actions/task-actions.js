@@ -8,6 +8,10 @@ import {
 } from '../Constants/action-types';
 import { config } from '../config/config';
 
+/**
+ * Action Type: ActionTypes.GET_DASHBOARD_TASKS
+ * Description: Dispatched when get all tasks from task table.
+ */
 export const getDashboardTasks = (data) => {
   return {
     type: GET_DASHBOARD_TASKS,
@@ -15,6 +19,10 @@ export const getDashboardTasks = (data) => {
   };
 };
 
+/**
+ * Action Type: ActionTypes.SET_LOADING
+ * Description: Dispatched when page loading.
+ */
 export const setLoadingStatus = (loading) => {
   return {
     type: SET_LOADING,
@@ -22,6 +30,10 @@ export const setLoadingStatus = (loading) => {
   };
 };
 
+/**
+ * Action Type: ActionTypes.SAVE_TASK
+ * Description: Dispatched when a new task is added to the task table.
+ */
 export const changeSaveTaskCount = (data) => {
   return {
     type: SAVE_TASK,
@@ -29,6 +41,10 @@ export const changeSaveTaskCount = (data) => {
   };
 };
 
+/**
+ * Action Type: ActionTypes.DELETE_TASK
+ * Description: Dispatched when delete a task from task table.
+ */
 export const successDeleteTask = (data) => {
   return {
     type: DELETE_TASK,
@@ -36,6 +52,10 @@ export const successDeleteTask = (data) => {
   };
 };
 
+/**
+ * Action Type: ActionTypes.UPDATE_TASK
+ * Description: Dispatched when update a task from task table.
+ */
 export const successUpdateTask = (data) => {
   return {
     type: UPDATE_TASK,
@@ -56,7 +76,6 @@ export const getAllTask = () => (dispatch) => {
 
 export const saveTask = (data) => (dispatch) => {
   const { url, method } = config.saveTask;
-  // dispatch(setLoadingStatus(true));
 
   return axios({
     url,

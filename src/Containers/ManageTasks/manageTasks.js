@@ -17,12 +17,12 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     if (allTasks === null) dispatch(getAllTask());
   });
 
-  // useEffect(()=> {
-  //     console.log(window.innerHeight);
-  // }, []);
-
   useEffect(() => {
     if (allTasks !== null) {
+      /**
+       * Sort all tasks based on the time that task is created. (descending order)
+       * Then doing some modification based on priority and status
+       */
       const sortedTasks = allTasks
         .sort((a, b) => Date.parse(b.timestamp) - Date.parse(a.timestamp))
         .map((value) => {
@@ -44,9 +44,11 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
           else if (value.status === parseInt(Label.COMPLETED_VALUE))
             value.statusValue = Label.COMPLETED;
 
+          // convert timestamp to 'YYYY-MM-DD' format
           value.timestamp = new Date(Date.parse(value.timestamp))
             .toISOString()
             .slice(0, 10);
+
           value.editMode = false;
 
           return value;
@@ -56,6 +58,11 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     }
   }, [allTasks]);
 
+  /**
+   * handleEdit - Event handler for form updation.
+   * Description: Triggers form updation, performs necessary actions, and prevents default behavior.
+   * @param {Event} e - The form updation event.
+   */
   const onEdit = (e, index) => {
     e.preventDefault();
 
@@ -70,6 +77,11 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     setTaskList(tasks);
   };
 
+  /**
+   * handleChange - Event handler for input changes.
+   * Description: Handles user input changes and updates the component's state accordingly.
+   * @param {Event} e - The input change event.
+   */
   const onChange = (e) => {
     setUpdateValue((prevState) => ({
       ...prevState,
@@ -77,6 +89,11 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     }));
   };
 
+  /**
+   * handleCancel - Event handler for cancellation actions.
+   * Description: Handles user cancel actions, resets the component or performs relevant actions.
+   * @param {Event} e - The cancel event (e.g., button click).
+   */
   const onCancel = (e) => {
     e.preventDefault();
 
@@ -86,6 +103,10 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     setTaskList(tasks);
   };
 
+  /**
+   * handleDeleteClick - Event handler for task deletion modal.
+   * Description: Once this function is called modal will be loaded
+   */
   const onDeleteClick = (e, value) => {
     e.preventDefault();
 
@@ -93,17 +114,34 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     setViewModal(true);
   };
 
+  /**
+   * handleModal - Event handler for close modal.
+   */
   const closeModal = () => {
     setViewModal(false);
   };
 
+  /**
+   * handleDelete - Event handler for task deletion.
+   * Description: Handles the deletion of a specific task, updates the state or performs relevant actions.
+   * @param {Event} e - The delete event (e.g., button click).
+   * @param {string} deleteId - The unique identifier of the item to be deleted.
+   */
   const onDelete = (e) => {
     e.preventDefault();
 
+    // Hide the Modal
     setViewModal(false);
+
     deleteTaskFn(deleteId);
   };
 
+  /**
+   * handleUpdate - Event handler for updating a task.
+   * Description: Manages the update process for a specific item, triggering state changes or relevant actions.
+   * @param {Event} e - The update event (e.g., button click).
+   * @param {string} value.id - The unique identifier of the item to be updated.
+   */
   const onUpdate = (e, value) => {
     e.preventDefault();
 

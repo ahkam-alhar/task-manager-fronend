@@ -12,6 +12,13 @@ const initialState = {
   saveCount: 0,
 };
 
+/**
+ * Reducer Function: taskReducer
+ * Description: Handles state changes for the task.
+ * @param {Array} state - The current state of the task.
+ * @param {Object} action - The action object that describes the state change.
+ * @returns {Array} - The new state of the task after applying the action.
+ */
 const taskReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DASHBOARD_TASKS:

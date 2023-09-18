@@ -1,4 +1,5 @@
-const IP_ADDRESS = 'http://localhost:8080/api';
+// TODO: Change the port number based on the Spring Project
+const IP_ADDRESS = 'http://localhost:{YOUR_SPRING_PROJECT_PORT}/api';
 
 export const config = {
   getAllTasks: {

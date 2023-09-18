@@ -29,6 +29,7 @@ const Dashboard = ({ loading, allTasks }) => {
       const mediumPrioOpenTaskList = [];
       const lowPrioOpenTaskList = [];
 
+      // Categorizing pending and open tasks based on prioritization and status
       allTasks.map((task) => {
         const { priority, status } = task;
 
@@ -57,6 +58,7 @@ const Dashboard = ({ loading, allTasks }) => {
         ...lowPrioOpenTaskList,
       ]);
 
+      // Categorizing pending tasks and count based on prioritization
       const pieData = [];
       pieData.push({
         title: Label.HIGH,
@@ -74,6 +76,7 @@ const Dashboard = ({ loading, allTasks }) => {
         color: '#adb5bd',
       });
 
+      // Remove 0 length pending tasks
       const filteredPieData = pieData.filter((task) => task.value !== 0);
 
       setPieChartData(filteredPieData);
@@ -99,7 +102,6 @@ const Dashboard = ({ loading, allTasks }) => {
               <h6 className="text-dark">
                 {Label.CURRENT_PENDING_TASKS_SUMMARY}
               </h6>
-              {console.log('pieedata', pieChartData)}
               {pieChartData && pieChartData.length !== 0 && (
                 <PieChart
                   data={pieChartData}
