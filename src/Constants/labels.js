@@ -39,6 +39,5 @@ export const THIS_IS_REQUIRED_FIELD = 'This is required field';
 
 // Modal Labels
 export const ARE_YOU_SURE = 'Are you sure?';
-export const DO_YOU_WANT_TO_DELETE_THIS_RECORD = 'Do you want to delete this record?';
-
- 
+export const DO_YOU_WANT_TO_DELETE_THIS_RECORD =
+  'Do you want to delete this record?';
