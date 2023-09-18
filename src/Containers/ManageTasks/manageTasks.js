@@ -107,7 +107,8 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
     const onUpdate = (e, value) => {
         e.preventDefault();
 
-        updateTaskFn(value.id, updateValue);
+        if (updateValue.task.length !== 0)
+            updateTaskFn(value.id, updateValue);
     }
 
     const customStyles = {
@@ -148,7 +149,17 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
                                         <th scope="row">{index + 1}</th>
                                         {value.editMode ? (
                                             <>
-                                                <td><input type="text" className="form-control" placeholder="Enter Task Name" name="task" maxLength={254} value={updateValue.task} onChange={onChange}/></td>
+                                                <td>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder={Label.ENTER_TASK_NAME}
+                                                        name="task"
+                                                        maxLength={254}
+                                                        value={updateValue.task}
+                                                        onChange={onChange}/>
+                                                        {updateValue.task.length === 0 && <div className="text-danger">{Label.THIS_IS_REQUIRED_FIELD}</div>}
+                                                </td>
                                                 <td>
                                                     <select className="form-control" name="priority" value={updateValue.priority} onChange={onChange}>
                                                         <option value={Label.LOW_VALUE}>{Label.LOW}</option>

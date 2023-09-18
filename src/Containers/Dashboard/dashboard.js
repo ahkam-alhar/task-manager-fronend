@@ -99,6 +99,7 @@ const Dashboard = ({ loading, allTasks }) => {
                             textClassOverride={"text-secondary"}
                             cardHeading={"Open Tasks"}
                             cardData={openTasks}
+                            // additionalTag={<button className='btn btn-outline-primary btn-sm'>Start</button>}
                         />
                     </div>
                 </div>

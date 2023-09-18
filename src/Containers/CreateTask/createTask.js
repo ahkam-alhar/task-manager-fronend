@@ -10,6 +10,7 @@ const CreateTask = ({ loading, saveTaskFn }) => {
         task: "",
         priority: Label.MEDIUM_VALUE
     });
+    const [showErrorMsg, setShowErrorMsg] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,17 +22,26 @@ const CreateTask = ({ loading, saveTaskFn }) => {
             ...prevState,
             [e.target.name]: e.target.value
         }))
+
+        if (e.target.name === 'task') {
+            setShowErrorMsg(false);
+        }
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        saveTaskFn(formData);
+        if (formData.task.length <= 0) {
+            setShowErrorMsg(true);
+        }
+        else {
+            saveTaskFn(formData);
 
-        setFormData({
-            task: "",
-            priority: Label.MEDIUM_VALUE
-        })
+            setFormData({
+                task: "",
+                priority: Label.MEDIUM_VALUE
+            })
+        }
     }
 
     const onCancel = (e) => {
@@ -51,7 +61,17 @@ const CreateTask = ({ loading, saveTaskFn }) => {
                     <form>
                         <div className="form-group my-3">
                             <label>{Label.TASK}</label>
-                            <input type="text" className="form-control" placeholder="Enter Task Name" name="task" maxLength={254} value={formData.task} onChange={onChange}/>
+                            <input
+                                type="text"
+                                className="form-control" 
+                                placeholder={Label.ENTER_TASK_NAME}
+                                name="task"
+                                maxLength={254}
+                                value={formData.task}
+                                onChange={onChange}
+                                required
+                            />
+                            {showErrorMsg && <div className="text-danger">{Label.THIS_IS_REQUIRED_FIELD}</div>}
                         </div>
                         <div className="form-group my-3">
                             <label for="inputState">{Label.PRIORITY}</label>

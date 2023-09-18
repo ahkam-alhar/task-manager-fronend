@@ -34,6 +34,8 @@ export const TASK = 'Task';
 export const PRIORITY = 'Priority';
 export const STATUS = 'Status';
 export const CREATED_DATE = 'Created Date';
+export const ENTER_TASK_NAME = 'Enter Task Name';
+export const THIS_IS_REQUIRED_FIELD = 'This is required field';
 
 // Modal Labels
 export const ARE_YOU_SURE = 'Are you sure?';
