@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Loader from '../../Components/Loader';
+import Loader from '../../Components/Loader/Loader';
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveTask, setLoadingStatus } from '../../actions/task-actions';

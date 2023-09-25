@@ -9,7 +9,7 @@ import {
 } from '../Constants/action-types';
 
 const initialState = {
-  loading: true,
+  loading: false,
   allTasks: null,
   apiFailure: null,
   showApiFailureModal: false,
@@ -28,33 +28,29 @@ const taskReducer = (state = initialState, action) => {
       return {
         ...state,
         allTasks: action.payload,
-        loading: false,
         showApiFailureModal: false,
       };
     case SET_LOADING:
       return {
         ...state,
-        loading: action.payload.loading,
+        loading: action.payload,
       };
     case SAVE_TASK:
       return {
         ...state,
         allTasks: null,
-        loading: false,
         showApiFailureModal: false,
       };
     case DELETE_TASK:
       return {
         ...state,
         allTasks: null,
-        loading: false,
         showApiFailureModal: false,
       };
     case UPDATE_TASK:
       return {
         ...state,
         allTasks: null,
-        loading: false,
         showApiFailureModal: false,
       };
     case API_FAILURE:
@@ -62,14 +58,12 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         apiFailure: action.payload,
         showApiFailureModal: true,
-        loading: false,
       };
     case HANDLE_API_FAILURE_MODAL:
       return {
         ...state,
         apiFailure: null,
         showApiFailureModal: action.payload,
-        loading: false,
       };
     default:
       return state;

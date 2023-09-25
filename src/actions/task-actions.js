@@ -25,10 +25,10 @@ export const successGetDashboardTasks = (data) => {
  * Action Type: ActionTypes.SET_LOADING
  * Description: Dispatched when page loading.
  */
-export const setLoadingStatus = (loading) => {
+export const setLoadingStatus = (status) => {
   return {
     type: SET_LOADING,
-    payload: { loading },
+    payload: status,
   };
 };
 
@@ -88,6 +88,7 @@ export const handleApiFailureModal = (data) => {
 
 export const getAllTask = () => (dispatch) => {
   const { url, method } = config.getAllTasks;
+  dispatch(setLoadingStatus(true));
 
   return axios({
     url,
@@ -95,15 +96,20 @@ export const getAllTask = () => (dispatch) => {
   })
     .then((response) => {
       dispatch(successGetDashboardTasks(response.data));
+      dispatch(setLoadingStatus(false));
+
+      return true;
     })
     .catch((e) => {
       const error = e && e.response && e.response.data;
       dispatch(apiFailure(error));
+      dispatch(setLoadingStatus(false));
     });
 };
 
 export const saveTask = (data) => (dispatch) => {
   const { url, method } = config.saveTask;
+  dispatch(setLoadingStatus(true));
 
   return axios({
     url,
@@ -112,15 +118,18 @@ export const saveTask = (data) => (dispatch) => {
   })
     .then((response) => {
       dispatch(successSaveTask(response));
+      dispatch(setLoadingStatus(false));
     })
     .catch((e) => {
       const error = e && e.response && e.response.data;
       dispatch(apiFailure(error));
+      dispatch(setLoadingStatus(false));
     });
 };
 
 export const deleteTask = (id) => (dispatch) => {
   const { url, method } = config.deleteTask;
+  dispatch(setLoadingStatus(true));
 
   return axios({
     url: url.replace(':id', id),
@@ -129,15 +138,18 @@ export const deleteTask = (id) => (dispatch) => {
     .then((response) => {
       dispatch(successDeleteTask(response));
       dispatch(getAllTask());
+      dispatch(setLoadingStatus(false));
     })
     .catch((e) => {
       const error = e && e.response && e.response.data;
       dispatch(apiFailure(error));
+      dispatch(setLoadingStatus(false));
     });
 };
 
 export const updateTask = (id, data) => (dispatch) => {
   const { url, method } = config.updateTask;
+  dispatch(setLoadingStatus(true));
 
   return axios({
     url: url.replace(':id', id),
@@ -147,9 +159,11 @@ export const updateTask = (id, data) => (dispatch) => {
     .then((response) => {
       dispatch(successUpdateTask(response));
       dispatch(getAllTask());
+      dispatch(setLoadingStatus(false));
     })
     .catch((e) => {
       const error = e && e.response && e.response.data;
       dispatch(apiFailure(error));
+      dispatch(setLoadingStatus(false));
     });
 };

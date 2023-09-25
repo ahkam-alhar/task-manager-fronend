@@ -1,6 +1,6 @@
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Loader from '../../Components/Loader';
+import Loader from '../../Components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import * as Label from '../../Constants/labels';
 import { deleteTask, getAllTask, updateTask } from '../../actions/task-actions';
