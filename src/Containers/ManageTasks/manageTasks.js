@@ -311,7 +311,7 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
 
 ManageTasks.propTypes = {
   loading: PropTypes.bool.isRequired,
-  allTasks: PropTypes.array.isRequired,
+  allTasks: PropTypes.array,
   deleteTaskFn: PropTypes.func.isRequired,
   updateTaskFn: PropTypes.func.isRequired,
 };

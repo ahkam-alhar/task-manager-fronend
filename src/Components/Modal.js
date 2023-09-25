@@ -25,7 +25,7 @@ const Modal = ({
   };
 
   return (
-    <ReactModal isOpen={showModal} style={customStyles}>
+    <ReactModal isOpen={showModal} style={customStyles} ariaHideApp={false}>
       <h3 className={`${headingClassOverride}`}>{heading}</h3>
       <p>{content}</p>
       <button className="btn btn-outline-secondary" onClick={button2Func}>
