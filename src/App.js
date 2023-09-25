@@ -9,6 +9,7 @@ import store from './Store/store';
 import CompletedTask from './Containers/CompletedTask/completedTask';
 import ManageTasks from './Containers/ManageTasks/manageTasks';
 import React from 'react';
+import ApiErrorModal from './Containers/ApiErrorModal/apiErrorModal';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             />
             <Route path={Navigate.TO_MANAGE_TASKS} element={<ManageTasks />} />
           </Routes>
+          <ApiErrorModal />
         </div>
       </BrowserRouter>
     </Provider>

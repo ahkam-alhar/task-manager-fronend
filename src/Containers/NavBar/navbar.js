@@ -2,21 +2,9 @@ import './navbar.css';
 import NavLink from '../../Components/NavLink';
 import * as Navigate from '../../Constants/routes';
 import * as Label from '../../Constants/labels';
-import Modal from '../../Components/Modal';
-import { connect } from 'react-redux';
-import { handleApiFailureModal } from '../../actions/task-actions';
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Navbar = ({
-  showApiFailureModal,
-  handleApiFailureModalFn,
-  apiFailure,
-}) => {
-  const onOkClick = () => {
-    handleApiFailureModalFn(false);
-  };
-
+const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-sm bg-body-tertiary">
@@ -64,50 +52,10 @@ const Navbar = ({
               />
             </form>
           </div>
-          <Modal
-            buttonText={Label.BUTTON_OK}
-            buttonFunc={onOkClick}
-            buttonClassOverride={'btn-danger'}
-            heading={
-              apiFailure && apiFailure.status === Label.ERROR_404
-                ? apiFailure.status
-                : Label.SOMETHING_WENT_WRONG
-            }
-            headingClassOverride={'text-danger'}
-            content={
-              apiFailure && apiFailure.status === Label.ERROR_404
-                ? apiFailure.message
-                : Label.TRY_AGAIN_LATER_OR_CONTACT_ADMIN
-            }
-            showModal={showApiFailureModal}
-            button2Text={Label.BUTTON_CANCEL}
-            button2Func={onOkClick}
-          />
         </div>
       </nav>
     </>
   );
 };
 
-Navbar.propTypes = {
-  showApiFailureModal: PropTypes.bool.isRequired,
-  apiFailure: PropTypes.any,
-  handleApiFailureModalFn: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  const { showApiFailureModal, apiFailure } = state;
-
-  return {
-    showApiFailureModal,
-    apiFailure,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  handleApiFailureModalFn: (status) => {
-    dispatch(handleApiFailureModal(status));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default Navbar;
