@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import * as Label from '../../Constants/labels';
 import { deleteTask, getAllTask, updateTask } from '../../actions/task-actions';
 import Modal from '../../Components/Modal';
+import React from 'react';
 
 const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
   const [taskList, setTaskList] = useState([]);
@@ -311,6 +312,8 @@ const ManageTasks = ({ loading, allTasks, deleteTaskFn, updateTaskFn }) => {
 ManageTasks.propTypes = {
   loading: PropTypes.bool.isRequired,
   allTasks: PropTypes.array.isRequired,
+  deleteTaskFn: PropTypes.func.isRequired,
+  updateTaskFn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

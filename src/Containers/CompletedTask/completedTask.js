@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { getAllTask } from '../../actions/task-actions';
 import * as Label from '../../Constants/labels';
+import React from 'react';
 
 const CompletedTask = ({ loading, allTasks }) => {
   const [completedTasks, setCompletedTasks] = useState([]);

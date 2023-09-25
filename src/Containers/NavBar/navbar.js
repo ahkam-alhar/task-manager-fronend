@@ -5,6 +5,8 @@ import * as Label from '../../Constants/labels';
 import Modal from '../../Components/Modal';
 import { connect } from 'react-redux';
 import { handleApiFailureModal } from '../../actions/task-actions';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Navbar = ({
   showApiFailureModal,
@@ -85,6 +87,12 @@ const Navbar = ({
       </nav>
     </>
   );
+};
+
+Navbar.propTypes = {
+  showApiFailureModal: PropTypes.bool.isRequired,
+  apiFailure: PropTypes.any,
+  handleApiFailureModalFn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

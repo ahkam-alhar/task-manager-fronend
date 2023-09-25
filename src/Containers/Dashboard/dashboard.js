@@ -7,6 +7,7 @@ import Loader from '../../Components/Loader';
 import TaskCard from '../../Components/TaskCard';
 import { PieChart } from 'react-minimal-pie-chart';
 import * as Label from '../../Constants/labels';
+import React from 'react';
 
 const Dashboard = ({ loading, allTasks }) => {
   const [highPrioPendingTasks, setHighPrioPendingTasks] = useState([]);
@@ -106,8 +107,8 @@ const Dashboard = ({ loading, allTasks }) => {
                 <PieChart
                   data={pieChartData}
                   lineWidth={60}
-                  label={(props) => {
-                    const { percentage, title, value } = props.dataEntry;
+                  label={(chartProps) => {
+                    const { percentage, title, value } = chartProps.dataEntry;
                     return `${title} - ${value}(${percentage.toFixed(0)}%)`;
                   }}
                   labelStyle={{
