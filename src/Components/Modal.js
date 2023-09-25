@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import React from 'react';
 
 const Modal = ({
   showModal,

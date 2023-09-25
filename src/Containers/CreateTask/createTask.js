@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveTask, setLoadingStatus } from '../../actions/task-actions';
 import * as Label from '../../Constants/labels';
+import React from 'react';
 
 const CreateTask = ({ loading, saveTaskFn }) => {
   const [formData, setFormData] = useState({
@@ -133,6 +134,7 @@ const CreateTask = ({ loading, saveTaskFn }) => {
 
 CreateTask.propTypes = {
   loading: PropTypes.bool.isRequired,
+  saveTaskFn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {

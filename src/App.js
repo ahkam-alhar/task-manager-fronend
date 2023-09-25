@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './Store/store';
 import CompletedTask from './Containers/CompletedTask/completedTask';
 import ManageTasks from './Containers/ManageTasks/manageTasks';
+import React from 'react';
 
 function App() {
   return (

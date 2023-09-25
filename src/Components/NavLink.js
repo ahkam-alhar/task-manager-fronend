@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const NavLink = (props) => {
   const { classOverride, navigatePath, label, icon } = props;
