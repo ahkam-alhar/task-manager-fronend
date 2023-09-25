@@ -1,5 +1,5 @@
 import { connect, useDispatch } from 'react-redux';
-import Loader from '../../Components/Loader';
+import Loader from '../../Components/Loader/Loader';
 import TaskCard from '../../Components/TaskCard';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';

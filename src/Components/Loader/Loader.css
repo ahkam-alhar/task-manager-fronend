@@ -1,0 +1,22 @@
+.loading {
+  background: rgba(255, 255, 255, 0.6);
+  bottom: 0;
+  color: black;
+  height: 100%;
+  left: 0;
+  margin: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 999999;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.loading-text {
+  font-weight: bold;
+}

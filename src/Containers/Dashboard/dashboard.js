@@ -3,7 +3,7 @@ import './dashboard.css';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getAllTask } from '../../actions/task-actions';
-import Loader from '../../Components/Loader';
+import Loader from '../../Components/Loader/Loader';
 import TaskCard from '../../Components/TaskCard';
 import { PieChart } from 'react-minimal-pie-chart';
 import * as Label from '../../Constants/labels';
