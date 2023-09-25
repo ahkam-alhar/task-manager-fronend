@@ -46,7 +46,7 @@ const CompletedTask = ({ loading, allTasks }) => {
 
 CompletedTask.propTypes = {
   loading: PropTypes.bool.isRequired,
-  allTasks: PropTypes.array.isRequired,
+  allTasks: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {

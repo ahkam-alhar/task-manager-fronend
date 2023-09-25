@@ -151,7 +151,7 @@ const Dashboard = ({ loading, allTasks }) => {
 
 Dashboard.propTypes = {
   loading: PropTypes.bool.isRequired,
-  allTasks: PropTypes.array.isRequired,
+  allTasks: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
